@@ -1,0 +1,26 @@
+services:
+  jupyter:
+    image: jupyter/datascience-notebook
+    container_name: jupyter
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./jupyter_data:/home/jovyan/work
+    environment:
+      - JUPYTER_TOKEN=python@2024
+    networks:
+      - iot_network
+
+  cassandra1:
+    image: cassandra:latest
+    container_name: cassandra1
+    ports:
+      - "9042:9042"
+    volumes:
+      - ./cassandra_data:/var/lib/cassandra
+    networks:
+      - iot_network
+
+networks:
+  iot_network:
+    driver: bridge
