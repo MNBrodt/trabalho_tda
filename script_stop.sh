@@ -1,3 +1,6 @@
 #!/bin/bash
-docker-compose down
-echo "Stop -> OK."
+
+# Para os contêineres Docker
+docker compose down
+
+echo "Stop docker-compose."

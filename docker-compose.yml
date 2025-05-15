@@ -1,23 +1,25 @@
+version: '3.8'
+
 services:
+ 
+
   jupyter:
-    image: jupyter/datascience-notebook
-    container_name: jupyter
+    image: jupyter/datascience-notebook:latest
+    container_name: jupyter_python
+    user: root
+    environment:
+      GRANT_SUDO: "yes"
+      NB_GID: "100"
+      JUPYTER_ENABLE_LAB: "yes"
+      TZ: America/Sao_Paulo
     ports:
       - "8888:8888"
     volumes:
-      - ./jupyter_data:/home/jovyan/work
-    environment:
-      - JUPYTER_TOKEN=python@2024
-    networks:
-      - iot_network
-
-  cassandra1:
-    image: cassandra:latest
-    container_name: cassandra1
-    ports:
-      - "9042:9042"
-    volumes:
-      - ./cassandra_data:/var/lib/cassandra
+#      - $PWD/jupyter_data:/home/jovyan/work
+      - $PWD:/home/jovyan/work
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+    command: start-notebook.sh --NotebookApp.token='python@2024'
     networks:
       - iot_network
 

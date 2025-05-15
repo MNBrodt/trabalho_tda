@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Start
+# stop e rebuild
+docker compose down
 docker compose up --build --remove-orphans -d
 
-echo "Start -> OK."
+echo "stop e rebuild."
